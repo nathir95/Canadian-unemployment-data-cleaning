@@ -11,8 +11,18 @@ df1=  df[df['AgeGroup']== '15 years and over']
 
 df1= df1[df1['Sex']== 'Both sexes']
 
-df11= df1.drop(columns=['Quebec', 'Ontario', 'Sex', 'AgeGroup'])
 
-df11.rename(columns = {"When":"Month"},inplace=True)
+df11.rename(columns = {"When":"Year"},inplace=True)
+
+df11.set_index('Year')
+
+time =df11['Year'].str.replace(r'\d{2}\:\d{2}\:\d{2}\ \w{2}','')
+
+
+time1 =time.str.replace(r'\d+\/\d\/','')
+df11['Year']=time1
 
 print(df11)
+
+df11.to_csv(r'C:\\Users\\nhaim\\Downloads\\unemployment1.csv',index = False)
+
